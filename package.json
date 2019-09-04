@@ -1,0 +1,421 @@
+{
+  "name": "konnected-adapter",
+  "display_name": "Konnected",
+  "version": "0.0.1",
+  "description": "Konnected Alarm Adapter.",
+  "author": "damooooooooooh",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "mozilla",
+    "iot",
+    "adapter",
+    "konnected",
+    "alarm"
+  ],
+  "homepage": "https://github.com/damooooooooooh/konnected-adapter",
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/damooooooooooh/konnected-adapter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/damooooooooooh/konnected-adapter/issues"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "local-devices": "^2.0.0",
+    "node-ssdp": "^4.0.0",
+    "uuidv4": "^5.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0"
+  },
+  "files": [
+    "LICENSE",
+    "index.js",
+    "lib/konnected-adapter.js",
+    "lib/konnected-device.js",
+    "lib/konnected-property.js",
+    "lib/konnected-classifier.js"
+  ],
+  "moziot": {
+    "api": {
+      "min": 2,
+      "max": 2
+    },
+    "plugin": true,
+    "exec": "{nodeLoader} {path}",
+    "config": {},
+    "schema": {
+      "title": "Konnected Configuration",
+      "description": "",
+      "type": "object",
+      "properties": {
+        "adapter_api_endpoint": {
+          "title": "Adapter API Endpoint",
+          "description": "The Embedded Adapter API Endpoint used by Konnected Devices to report device activity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "adapter_api_token": {
+          "title": "Adapter API Token",
+          "description": "The token used by Konnected Devices to report device activity. Leave blank to autogenerate a token.",
+          "type": "string"
+        },
+        "devices": {
+          "title": "Discovered Devices",
+          "description": "Konnected Devices are automatically detected and listed below.  Configure the Zones for each device below and then pair the devices on the add things page.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "device_name",
+              "device_type"
+            ],
+            "properties": {
+              "device_name": {
+                "title": "Friendly Name",
+                "description": "Assign a name to this device",
+                "type": "string"
+              },
+              "device_type": {
+                "title": "Device Type",
+                "description": "Select the setup for this device",
+                "type": "string",
+                "enum": [
+                  "Konnected Alarm Panel",
+                  "NodeMCU Base"
+                ],
+                "default": "Konnected Alarm Panel"
+              },
+              "enabled": {
+                "title": "Enabled",
+                "description": "Enabling this device will allow pairing of configured zones. Disabling will remove all paired devices.",
+                "type": "boolean",
+                "default": false
+              },
+              "mac_address": {
+                "title": "Mac Address",
+                "description": "Konnected Device Mac Address",
+                "type": "string",
+                "readOnly": true
+              },
+              "ip_address": {
+                "title": "IP Address",
+                "description": "Konnected Device IP Address",
+                "type": "string",
+                "readOnly": true
+              },
+              "api_endpoint": {
+                "title": "Api Endpoint",
+                "description": "Konnected Device API Endpoint",
+                "type": "string",
+                "readOnly": true
+              },
+              "rssi": {
+                "title": "RSSI",
+                "description": "Konnected Device Received Signal Strength Indicator",
+                "type": "integer",
+                "readOnly": true
+              },              
+              "blink": {
+                "title": "Blink",
+                "description": "Blink the Konnected Device blue LED upon successful transmission of a state change.",
+                "type": "boolean",
+                "default": true
+              },
+              "zone1": {
+                "title": "Zone 1 / NodeMCU 1",
+                "type": "string",
+                "enum": [
+                  "Siren/Strobe",
+                  "Switch",
+                  "Momentary Switch",
+                  "Beep/Blink",
+                  "Open/Close Sensor",
+                  "Motion Sensor",
+                  "Smoke Detector",
+                  "Carbon Monoxide Detector",
+                  "Panic Button",
+                  "Water Sensor",
+                  "Temperature & Humidity Sensor",
+                  "Temperature Probe(s)"
+                ]
+              },
+              "zone2": {
+                "title": "Zone 2 / NodeMCU 2",                
+                "type": "string",
+                "enum": [
+                  "Siren/Strobe",
+                  "Switch",
+                  "Momentary Switch",
+                  "Beep/Blink",
+                  "Open/Close Sensor",
+                  "Motion Sensor",
+                  "Smoke Detector",
+                  "Carbon Monoxide Detector",
+                  "Panic Button",
+                  "Water Sensor",
+                  "Temperature & Humidity Sensor",
+                  "Temperature Probe(s)"
+                ]
+              },
+              "zone3": {
+                "title": "Zone 3 / NodeMCU 5",                
+                "type": "string",
+                "enum": [
+                  "Siren/Strobe",
+                  "Switch",
+                  "Momentary Switch",
+                  "Beep/Blink",
+                  "Open/Close Sensor",
+                  "Motion Sensor",
+                  "Smoke Detector",
+                  "Carbon Monoxide Detector",
+                  "Panic Button",
+                  "Water Sensor",
+                  "Temperature & Humidity Sensor",
+                  "Temperature Probe(s)"
+                ]
+              },
+              "zone4": {
+                "title": "Zone 4 / NodeMCU 6",                
+                "type": "string",
+                "enum": [
+                  "Siren/Strobe",
+                  "Switch",
+                  "Momentary Switch",
+                  "Beep/Blink",
+                  "Open/Close Sensor",
+                  "Motion Sensor",
+                  "Smoke Detector",
+                  "Carbon Monoxide Detector",
+                  "Panic Button",
+                  "Water Sensor",
+                  "Temperature & Humidity Sensor",
+                  "Temperature Probe(s)"
+                ]
+              },
+              "zone5": {
+                "title": "Zone 5 / NodeMCU 7",                
+                "type": "string",
+                "enum": [
+                  "Siren/Strobe",
+                  "Switch",
+                  "Momentary Switch",
+                  "Beep/Blink",
+                  "Open/Close Sensor",
+                  "Motion Sensor",
+                  "Smoke Detector",
+                  "Carbon Monoxide Detector",
+                  "Panic Button",
+                  "Water Sensor",
+                  "Temperature & Humidity Sensor",
+                  "Temperature Probe(s)"
+                ]
+              },
+              "zone6": {
+                "title": "Zone 6 / NodeMCU 9",                
+                "type": "string",
+                "enum": [
+                  "Open/Close Sensor",
+                  "Motion Sensor",
+                  "Smoke Detector",
+                  "Carbon Monoxide Detector",
+                  "Panic Button",
+                  "Water Sensor"
+                ]
+              },
+              "zone7": {
+                "title": "ALARM or OUT / NodeMCU 8",                
+                "type": "string",
+                "enum": [
+                  "Siren/Strobe",
+                  "Switch",
+                  "Momentary Switch",
+                  "Beep/Blink"                                    
+                ]
+              }
+            },
+            "dependencies": {
+              "zone1": {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Siren/Strobe"
+                        ]
+                      },
+                      "momentary": {
+                        "type": "integer"
+                      },
+                      "pause": {
+                        "type": "integer"
+                      },
+                      "repeat": {
+                        "type": "integer"
+                      }                                                           
+                    }
+                  },
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Switch"
+                        ]
+                      },
+                      "momentary": {
+                        "type": "integer"
+                      },
+                      "pause": {
+                        "type": "integer"
+                      },
+                      "repeat": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "momentary"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Momentary Switch"
+                        ]
+                      },
+                      "momentary": {
+                        "type": "integer"
+                      },
+                      "pause": {
+                        "type": "integer"
+                      },
+                      "repeat": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "momentary"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Beep/Blink"
+                        ]
+                      },
+                      "momentary": {
+                        "type": "integer"
+                      },
+                      "pause": {
+                        "type": "integer"
+                      },
+                      "repeat": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Open/Close Sensor"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Motion Sensor"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Smoke Detector"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Carbon Monoxide Detector"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Panic Button"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Water Sensor"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Temperature & Humidity Sensor"
+                        ]
+                      },
+                      "poll_interval": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "poll_interval"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "zone1": {
+                        "enum": [
+                          "Temperature Probe(s)'"
+                        ]
+                      },
+                      "poll_interval": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "poll_interval"
+                    ]
+                  }                                                                                                                                                   
+                ]
+              }
+            }               
+          }
+        }
+      }
+    }
+  }
+}
