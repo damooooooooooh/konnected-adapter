@@ -28,6 +28,7 @@
     "url": "https://github.com/damooooooooooh/konnected-adapter/issues"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "local-devices": "^2.0.0",
@@ -42,9 +43,11 @@
     "LICENSE",
     "index.js",
     "lib/konnected-adapter.js",
+    "lib/konnected-database.js",
     "lib/konnected-device.js",
     "lib/konnected-property.js",
-    "lib/konnected-classifier.js"
+    "lib/konnected-classifier.js",
+    "lib/konnected-helper.js"
   ],
   "moziot": {
     "api": {
@@ -125,7 +128,7 @@
                 "description": "Konnected Device Received Signal Strength Indicator",
                 "type": "integer",
                 "readOnly": true
-              },              
+              },
               "blink": {
                 "title": "Blink",
                 "description": "Blink the Konnected Device blue LED upon successful transmission of a state change.",
@@ -151,7 +154,7 @@
                 ]
               },
               "zone2": {
-                "title": "Zone 2 / NodeMCU 2",                
+                "title": "Zone 2 / NodeMCU 2",
                 "type": "string",
                 "enum": [
                   "Siren/Strobe",
@@ -169,7 +172,7 @@
                 ]
               },
               "zone3": {
-                "title": "Zone 3 / NodeMCU 5",                
+                "title": "Zone 3 / NodeMCU 5",
                 "type": "string",
                 "enum": [
                   "Siren/Strobe",
@@ -187,7 +190,7 @@
                 ]
               },
               "zone4": {
-                "title": "Zone 4 / NodeMCU 6",                
+                "title": "Zone 4 / NodeMCU 6",
                 "type": "string",
                 "enum": [
                   "Siren/Strobe",
@@ -205,7 +208,7 @@
                 ]
               },
               "zone5": {
-                "title": "Zone 5 / NodeMCU 7",                
+                "title": "Zone 5 / NodeMCU 7",
                 "type": "string",
                 "enum": [
                   "Siren/Strobe",
@@ -223,7 +226,7 @@
                 ]
               },
               "zone6": {
-                "title": "Zone 6 / NodeMCU 9",                
+                "title": "Zone 6 / NodeMCU 9",
                 "type": "string",
                 "enum": [
                   "Open/Close Sensor",
@@ -235,184 +238,16 @@
                 ]
               },
               "zone7": {
-                "title": "ALARM or OUT / NodeMCU 8",                
+                "title": "ALARM or OUT / NodeMCU 8",
                 "type": "string",
                 "enum": [
                   "Siren/Strobe",
                   "Switch",
                   "Momentary Switch",
-                  "Beep/Blink"                                    
+                  "Beep/Blink"
                 ]
               }
-            },
-            "dependencies": {
-              "zone1": {
-                "oneOf": [
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Siren/Strobe"
-                        ]
-                      },
-                      "momentary": {
-                        "type": "integer"
-                      },
-                      "pause": {
-                        "type": "integer"
-                      },
-                      "repeat": {
-                        "type": "integer"
-                      }                                                           
-                    }
-                  },
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Switch"
-                        ]
-                      },
-                      "momentary": {
-                        "type": "integer"
-                      },
-                      "pause": {
-                        "type": "integer"
-                      },
-                      "repeat": {
-                        "type": "integer"
-                      }
-                    },
-                    "required": [
-                      "momentary"
-                    ]
-                  },
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Momentary Switch"
-                        ]
-                      },
-                      "momentary": {
-                        "type": "integer"
-                      },
-                      "pause": {
-                        "type": "integer"
-                      },
-                      "repeat": {
-                        "type": "integer"
-                      }
-                    },
-                    "required": [
-                      "momentary"
-                    ]
-                  },
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Beep/Blink"
-                        ]
-                      },
-                      "momentary": {
-                        "type": "integer"
-                      },
-                      "pause": {
-                        "type": "integer"
-                      },
-                      "repeat": {
-                        "type": "integer"
-                      }
-                    }
-                  },
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Open/Close Sensor"
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Motion Sensor"
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Smoke Detector"
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Carbon Monoxide Detector"
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Panic Button"
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Water Sensor"
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Temperature & Humidity Sensor"
-                        ]
-                      },
-                      "poll_interval": {
-                        "type": "integer"
-                      }
-                    },
-                    "required": [
-                      "poll_interval"
-                    ]
-                  },
-                  {
-                    "properties": {
-                      "zone1": {
-                        "enum": [
-                          "Temperature Probe(s)'"
-                        ]
-                      },
-                      "poll_interval": {
-                        "type": "integer"
-                      }
-                    },
-                    "required": [
-                      "poll_interval"
-                    ]
-                  }                                                                                                                                                   
-                ]
-              }
-            }               
+            }
           }
         }
       }
