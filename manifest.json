@@ -1,0 +1,217 @@
+{
+  "author": "damooooooooooh", 
+  "description": "Konnected Alarm Adapter.", 
+  "gateway_specific_settings": {
+    "webthings": {
+      "exec": "{nodeLoader} {path}", 
+      "primary_type": "adapter", 
+      "strict_max_version": "*", 
+      "strict_min_version": "0.10.0"
+    }
+  }, 
+  "homepage_url": "https://github.com/damooooooooooh/konnected-adapter", 
+  "id": "konnected-adapter", 
+  "license": "MPL-2.0", 
+  "manifest_version": 1, 
+  "name": "Konnected", 
+  "options": {
+    "default": {}, 
+    "schema": {
+      "description": "", 
+      "properties": {
+        "adapter_api_endpoint": {
+          "description": "The Embedded Adapter API Endpoint used by Konnected Devices to report device activity.", 
+          "readOnly": true, 
+          "title": "Adapter API Endpoint", 
+          "type": "string"
+        }, 
+        "adapter_api_token": {
+          "description": "The token used by Konnected Devices to report device activity. Leave blank to autogenerate a token.", 
+          "title": "Adapter API Token", 
+          "type": "string"
+        }, 
+        "devices": {
+          "description": "Konnected Devices are automatically detected and listed below.  Configure the Zones for each device below and then pair the devices on the add things page.", 
+          "items": {
+            "properties": {
+              "api_endpoint": {
+                "description": "Konnected Device API Endpoint", 
+                "readOnly": true, 
+                "title": "Api Endpoint", 
+                "type": "string"
+              }, 
+              "blink": {
+                "default": true, 
+                "description": "Blink the Konnected Device blue LED upon successful transmission of a state change.", 
+                "title": "Blink", 
+                "type": "boolean"
+              }, 
+              "device_name": {
+                "description": "Assign a name to this device", 
+                "title": "Friendly Name", 
+                "type": "string"
+              }, 
+              "device_type": {
+                "default": "Konnected Alarm Panel", 
+                "description": "Select the setup for this device", 
+                "enum": [
+                  "Konnected Alarm Panel", 
+                  "NodeMCU Base"
+                ], 
+                "title": "Device Type", 
+                "type": "string"
+              }, 
+              "enabled": {
+                "default": false, 
+                "description": "Enabling this device will allow pairing of configured zones. Disabling will remove all paired devices.", 
+                "title": "Enabled", 
+                "type": "boolean"
+              }, 
+              "ip_address": {
+                "description": "Konnected Device IP Address", 
+                "readOnly": true, 
+                "title": "IP Address", 
+                "type": "string"
+              }, 
+              "mac_address": {
+                "description": "Konnected Device Mac Address", 
+                "readOnly": true, 
+                "title": "Mac Address", 
+                "type": "string"
+              }, 
+              "rssi": {
+                "description": "Konnected Device Received Signal Strength Indicator", 
+                "readOnly": true, 
+                "title": "RSSI", 
+                "type": "integer"
+              }, 
+              "zone1": {
+                "enum": [
+                  "Siren/Strobe", 
+                  "Switch", 
+                  "Momentary Switch", 
+                  "Beep/Blink", 
+                  "Open/Close Sensor", 
+                  "Motion Sensor", 
+                  "Smoke Detector", 
+                  "Carbon Monoxide Detector", 
+                  "Panic Button", 
+                  "Water Sensor", 
+                  "Temperature & Humidity Sensor", 
+                  "Temperature Probe(s)"
+                ], 
+                "title": "Zone 1 / NodeMCU 1", 
+                "type": "string"
+              }, 
+              "zone2": {
+                "enum": [
+                  "Siren/Strobe", 
+                  "Switch", 
+                  "Momentary Switch", 
+                  "Beep/Blink", 
+                  "Open/Close Sensor", 
+                  "Motion Sensor", 
+                  "Smoke Detector", 
+                  "Carbon Monoxide Detector", 
+                  "Panic Button", 
+                  "Water Sensor", 
+                  "Temperature & Humidity Sensor", 
+                  "Temperature Probe(s)"
+                ], 
+                "title": "Zone 2 / NodeMCU 2", 
+                "type": "string"
+              }, 
+              "zone3": {
+                "enum": [
+                  "Siren/Strobe", 
+                  "Switch", 
+                  "Momentary Switch", 
+                  "Beep/Blink", 
+                  "Open/Close Sensor", 
+                  "Motion Sensor", 
+                  "Smoke Detector", 
+                  "Carbon Monoxide Detector", 
+                  "Panic Button", 
+                  "Water Sensor", 
+                  "Temperature & Humidity Sensor", 
+                  "Temperature Probe(s)"
+                ], 
+                "title": "Zone 3 / NodeMCU 5", 
+                "type": "string"
+              }, 
+              "zone4": {
+                "enum": [
+                  "Siren/Strobe", 
+                  "Switch", 
+                  "Momentary Switch", 
+                  "Beep/Blink", 
+                  "Open/Close Sensor", 
+                  "Motion Sensor", 
+                  "Smoke Detector", 
+                  "Carbon Monoxide Detector", 
+                  "Panic Button", 
+                  "Water Sensor", 
+                  "Temperature & Humidity Sensor", 
+                  "Temperature Probe(s)"
+                ], 
+                "title": "Zone 4 / NodeMCU 6", 
+                "type": "string"
+              }, 
+              "zone5": {
+                "enum": [
+                  "Siren/Strobe", 
+                  "Switch", 
+                  "Momentary Switch", 
+                  "Beep/Blink", 
+                  "Open/Close Sensor", 
+                  "Motion Sensor", 
+                  "Smoke Detector", 
+                  "Carbon Monoxide Detector", 
+                  "Panic Button", 
+                  "Water Sensor", 
+                  "Temperature & Humidity Sensor", 
+                  "Temperature Probe(s)"
+                ], 
+                "title": "Zone 5 / NodeMCU 7", 
+                "type": "string"
+              }, 
+              "zone6": {
+                "enum": [
+                  "Open/Close Sensor", 
+                  "Motion Sensor", 
+                  "Smoke Detector", 
+                  "Carbon Monoxide Detector", 
+                  "Panic Button", 
+                  "Water Sensor"
+                ], 
+                "title": "Zone 6 / NodeMCU 9", 
+                "type": "string"
+              }, 
+              "zone7": {
+                "enum": [
+                  "Siren/Strobe", 
+                  "Switch", 
+                  "Momentary Switch", 
+                  "Beep/Blink"
+                ], 
+                "title": "ALARM or OUT / NodeMCU 8", 
+                "type": "string"
+              }
+            }, 
+            "required": [
+              "device_name", 
+              "device_type"
+            ], 
+            "type": "object"
+          }, 
+          "title": "Discovered Devices", 
+          "type": "array"
+        }
+      }, 
+      "title": "Konnected Configuration", 
+      "type": "object"
+    }
+  }, 
+  "short_name": "Konnected", 
+  "version": "0.0.1"
+}

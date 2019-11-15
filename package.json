@@ -42,6 +42,8 @@
   "files": [
     "LICENSE",
     "index.js",
+    "manifest.json",
+    "SHA256SUMS",
     "lib/konnected-adapter.js",
     "lib/konnected-database.js",
     "lib/konnected-device.js",
